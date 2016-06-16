@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JuProgressbar</string>
+    <string name="load_text">Loading...</string>
+</resources>
