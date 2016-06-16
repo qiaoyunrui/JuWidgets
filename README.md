@@ -44,7 +44,8 @@ The wharehouse of weights.
     ```
   
   Step 3. Add this view to your XML
-    ```xml
+    ```html
+    
       <com.juhezi.juprogressbar.View.JuProgressbar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,7 +56,9 @@ The wharehouse of weights.
         juhezi:color3="@color/yellow"
         juhezi:color4="@color/green"
         juhezi:loadingText=""
-        juhezi:colorNum="4"></com.juhezi.juprogressbar.View.JuProgressbar>
+        juhezi:colorNum="4">
+     </com.juhezi.juprogressbar.View.JuProgressbar>
+     
     ```
   
 ## 2 .loading....
