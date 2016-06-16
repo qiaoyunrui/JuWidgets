@@ -38,6 +38,8 @@ public class RectView extends View {
     private float radius = 5f; //圆角矩形的
     private float lineLen = 35f;   //圆角矩形的边长
 
+    private int rectColor = Color.BLUE;
+
     public RectView(Context context) {
         super(context);
         init();
@@ -74,12 +76,12 @@ public class RectView extends View {
         int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        if(widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(dip2px(defWidth),dip2px(defHeight));
-        } else if(widthSpecMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(dip2px(defWidth),heightSpecSize);
-        } else if(heightSpecMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(widthSpecSize,dip2px(defHeight));
+        if (widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST) {
+            setMeasuredDimension(dip2px(defWidth), dip2px(defHeight));
+        } else if (widthSpecMode == MeasureSpec.AT_MOST) {
+            setMeasuredDimension(dip2px(defWidth), heightSpecSize);
+        } else if (heightSpecMode == MeasureSpec.AT_MOST) {
+            setMeasuredDimension(widthSpecSize, dip2px(defHeight));
         }
     }
 
@@ -111,7 +113,6 @@ public class RectView extends View {
                 dip2px(radius),
                 dip2px(radius),
                 mPaint);
-        Log.i(TAG,"RectView draw");
     }
 
     private int dip2px(float dipValue) {
@@ -121,10 +122,27 @@ public class RectView extends View {
 
     public void setColorNum(int colorNum) {
         this.colorNum = colorNum;
+        colors.setLength(colorNum);
     }
 
     public void addColor(int color) {
         colors.add(color);
     }
 
+    public void setRectColor(int color) {
+
+        if(mPaint != null) {
+            mPaint.setColor(color);
+            invalidate();
+        }
+
+    }
+
+    public int getRectColor() {
+        return rectColor;
+    }
+
+    public int getNextColor() {
+        return colors.next();
+    }
 }

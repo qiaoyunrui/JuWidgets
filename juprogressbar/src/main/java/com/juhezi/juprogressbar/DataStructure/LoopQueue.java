@@ -1,5 +1,7 @@
 package com.juhezi.juprogressbar.DataStructure;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,8 @@ import java.util.List;
  * Created by qiaoyunrui on 16-6-15.
  */
 public class LoopQueue<T> {
+
+    private static final String TAG = "LoopQueue";
 
     private int length = 1; //默认长度为4
     private int sign = 0; //标志位

@@ -14,7 +14,13 @@
     <com.juhezi.juprogressbar.View.JuProgressbar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        juhezi:colorNum="4"
+        juhezi:color1="@color/blue"
+        juhezi:color2="@color/red"
+        juhezi:color3="@color/yellow"
+        juhezi:color4="@color/green"
+        >
     </com.juhezi.juprogressbar.View.JuProgressbar>
 
 </RelativeLayout>

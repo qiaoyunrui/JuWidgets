@@ -3,8 +3,11 @@ package com.juhezi.juprogressbar.View;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -52,6 +55,9 @@ public class JuProgressbar extends FrameLayout {
     private Interpolator upThrowInterpolator = new DecelerateInterpolator(1.2f);
     private Interpolator downFallInterpolator = new AccelerateInterpolator(1.2f);
 
+    private int lastRectColor = Color.BLUE;
+    private int currentColor = Color.BLUE;
+
     public JuProgressbar(Context context) {
         super(context);
         init();
@@ -65,10 +71,10 @@ public class JuProgressbar extends FrameLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.JuProgressbar);
         loadText = typedArray.getString(R.styleable.JuProgressbar_loadingText);
         colorNum = typedArray.getInt(R.styleable.JuProgressbar_colorNum, 1);
-        rectColor1 = typedArray.getColor(R.styleable.JuProgressbar_color1, 0xf9ffff);
-        rectColor2 = typedArray.getColor(R.styleable.JuProgressbar_color2, 0xffffff);
-        rectColor3 = typedArray.getColor(R.styleable.JuProgressbar_color3, 0xffffff);
-        rectColor4 = typedArray.getColor(R.styleable.JuProgressbar_color4, 0xffffff);
+        rectColor1 = typedArray.getColor(R.styleable.JuProgressbar_color1, 0xFF0000FF);
+        rectColor2 = typedArray.getColor(R.styleable.JuProgressbar_color2, 0xFF0000FF);
+        rectColor3 = typedArray.getColor(R.styleable.JuProgressbar_color3, 0xFF0000FF);
+        rectColor4 = typedArray.getColor(R.styleable.JuProgressbar_color4, 0xFF0000FF);
         typedArray.recycle();
         init();
     }
@@ -91,8 +97,6 @@ public class JuProgressbar extends FrameLayout {
         mRectView.addColor(rectColor2);
         mRectView.addColor(rectColor3);
         mRectView.addColor(rectColor4);
-
-
 
         startLoading(300);
 
@@ -153,23 +157,28 @@ public class JuProgressbar extends FrameLayout {
     /**
      * 上抛
      */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void upThrow() {
+        currentColor = mRectView.getNextColor();
         ObjectAnimator rectTranAnim = ObjectAnimator.ofFloat(mRectView,
                 "translationY",0,-distance / 2);
         ObjectAnimator rectRotateAnim = ObjectAnimator.ofFloat(mRectView,
                 "rotation",0,90);
         ObjectAnimator shadowScaleAnim = ObjectAnimator.ofFloat(shadowImg,
                 "scaleX",0.2f,1);
-
+        ObjectAnimator rectColorAnim = ObjectAnimator.ofArgb(mRectView,
+                "rectColor", lastRectColor,currentColor);
+        lastRectColor = currentColor;
         rectRotateAnim.setInterpolator(upThrowInterpolator);
         rectTranAnim.setInterpolator(upThrowInterpolator);
         shadowScaleAnim.setInterpolator(upThrowInterpolator);
+        rectColorAnim.setInterpolator(downFallInterpolator);
 
         mAnimatorSet = new AnimatorSet();
 
         mAnimatorSet.setDuration(ANIM_DURATION);
 
-        mAnimatorSet.playTogether(rectRotateAnim,rectTranAnim,shadowScaleAnim);
+        mAnimatorSet.playTogether(rectRotateAnim,rectTranAnim,shadowScaleAnim,rectColorAnim);
 
         mAnimatorSet.addListener(new Animator.AnimatorListener() {
             @Override
@@ -198,21 +207,29 @@ public class JuProgressbar extends FrameLayout {
     /**
      * 下落
      */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void downFall() {
+
+        currentColor = mRectView.getNextColor();
+
         ObjectAnimator rectTranAnim = ObjectAnimator.ofFloat(mRectView,
                 "translationY",-distance / 2,0);
         ObjectAnimator rectRotateAnim = ObjectAnimator.ofFloat(mRectView,
                 "rotation",0,90);
         ObjectAnimator shadowScaleAnim = ObjectAnimator.ofFloat(shadowImg,
                 "scaleX",1,0.2f);
+        ObjectAnimator rectColorAnim = ObjectAnimator.ofArgb(mRectView,
+                "rectColor", lastRectColor,currentColor);
+        lastRectColor = currentColor;
 
         rectRotateAnim.setInterpolator(downFallInterpolator);
         rectTranAnim.setInterpolator(downFallInterpolator);
         shadowScaleAnim.setInterpolator(downFallInterpolator);
+        rectColorAnim.setInterpolator(downFallInterpolator);
 
         mAnimatorSet = new AnimatorSet();
 
-        mAnimatorSet.playTogether(rectTranAnim,rectRotateAnim,shadowScaleAnim);
+        mAnimatorSet.playTogether(rectTranAnim,rectRotateAnim,shadowScaleAnim,rectColorAnim);
         mAnimatorSet.setDuration(ANIM_DURATION);
         mAnimatorSet.addListener(new Animator.AnimatorListener() {
             @Override
