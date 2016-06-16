@@ -1,5 +1,8 @@
 package com.juhezi.juprogressbar.View;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
@@ -9,6 +12,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +31,8 @@ public class JuProgressbar extends FrameLayout {
 
     private static final String TAG = "JuProgressbar";
 
+    private static final long ANIM_DURATION = 500;
+
     private RectView mRectView;
 
     private TextView loadTextView;   //显示加载文字的TextView
@@ -37,9 +46,11 @@ public class JuProgressbar extends FrameLayout {
     private int rectColor3 = 0xfff;
     private int rectColor4 = 0xfff;
 
-    private int defHeight = 170;
-    private int defWidth = 170;
+    private int distance = 100; //上抛的高度
+    private AnimatorSet mAnimatorSet = null;
 
+    private Interpolator upThrowInterpolator = new DecelerateInterpolator(1.2f);
+    private Interpolator downFallInterpolator = new AccelerateInterpolator(1.2f);
 
     public JuProgressbar(Context context) {
         super(context);
@@ -80,6 +91,151 @@ public class JuProgressbar extends FrameLayout {
         mRectView.addColor(rectColor2);
         mRectView.addColor(rectColor3);
         mRectView.addColor(rectColor4);
+
+
+
+        startLoading(300);
+
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        distance = getHeight() - mRectView.getHeight() - 30;
+    }
+
+    /**
+     * 开始加载动画
+     * @param delayTime
+     */
+    private void startLoading(long delayTime) {
+        if(mAnimatorSet != null && mAnimatorSet.isRunning()) {
+            return;
+        }
+        this.removeCallbacks(mRunnable);
+        if(delayTime > 0) {
+            postDelayed(mRunnable,delayTime);
+        } else {
+            post(mRunnable);
+        }
+    }
+
+    /**
+     * 停止加载动画
+     */
+    private void stopLoading() {
+        if(mAnimatorSet != null) {
+            if(mAnimatorSet.isRunning()) {
+                mAnimatorSet.cancel();
+            }
+            mAnimatorSet = null;
+        }
+        this.removeCallbacks(mRunnable);
+    }
+
+    @Override
+    public void setVisibility(int visibility) {
+        super.setVisibility(visibility);
+        if(visibility == View.VISIBLE) {
+            startLoading(300);
+        } else {
+            stopLoading();
+        }
+    }
+
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            upThrow();
+        }
+    };
+
+    /**
+     * 上抛
+     */
+    private void upThrow() {
+        ObjectAnimator rectTranAnim = ObjectAnimator.ofFloat(mRectView,
+                "translationY",0,-distance / 2);
+        ObjectAnimator rectRotateAnim = ObjectAnimator.ofFloat(mRectView,
+                "rotation",0,90);
+        ObjectAnimator shadowScaleAnim = ObjectAnimator.ofFloat(shadowImg,
+                "scaleX",0.2f,1);
+
+        rectRotateAnim.setInterpolator(upThrowInterpolator);
+        rectTranAnim.setInterpolator(upThrowInterpolator);
+        shadowScaleAnim.setInterpolator(upThrowInterpolator);
+
+        mAnimatorSet = new AnimatorSet();
+
+        mAnimatorSet.setDuration(ANIM_DURATION);
+
+        mAnimatorSet.playTogether(rectRotateAnim,rectTranAnim,shadowScaleAnim);
+
+        mAnimatorSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                downFall();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        mAnimatorSet.start();
+    }
+
+    /**
+     * 下落
+     */
+    private void downFall() {
+        ObjectAnimator rectTranAnim = ObjectAnimator.ofFloat(mRectView,
+                "translationY",-distance / 2,0);
+        ObjectAnimator rectRotateAnim = ObjectAnimator.ofFloat(mRectView,
+                "rotation",0,90);
+        ObjectAnimator shadowScaleAnim = ObjectAnimator.ofFloat(shadowImg,
+                "scaleX",1,0.2f);
+
+        rectRotateAnim.setInterpolator(downFallInterpolator);
+        rectTranAnim.setInterpolator(downFallInterpolator);
+        shadowScaleAnim.setInterpolator(downFallInterpolator);
+
+        mAnimatorSet = new AnimatorSet();
+
+        mAnimatorSet.playTogether(rectTranAnim,rectRotateAnim,shadowScaleAnim);
+        mAnimatorSet.setDuration(ANIM_DURATION);
+        mAnimatorSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                upThrow();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        mAnimatorSet.start();
     }
 
 }

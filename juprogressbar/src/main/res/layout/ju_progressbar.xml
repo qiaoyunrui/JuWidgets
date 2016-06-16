@@ -19,7 +19,7 @@
         android:layout_height="3dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/progress_margin_top"
-        android:layout_marginBottom="@dimen/progress_margin"
+        android:layout_marginBottom="@dimen/shadow_margin_bottom"
         android:layout_above="@+id/loadTextTv"
         android:src="@drawable/shadow_shape" />
 
