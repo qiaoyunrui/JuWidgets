@@ -89,7 +89,7 @@ public class JuProgressbar extends FrameLayout {
         mRectView = (RectView) findViewById(R.id.rectView);
         shadowImg = (ImageView) findViewById(R.id.shadowImg);
         loadTextView = (TextView) findViewById(R.id.loadTextTv);
-        if(!TextUtils.isEmpty(loadText)) {
+        if (!TextUtils.isEmpty(loadText)) {
             loadTextView.setText(loadText);
         }
         mRectView.setColorNum(colorNum);
@@ -105,20 +105,21 @@ public class JuProgressbar extends FrameLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        distance = getHeight() - mRectView.getHeight() - 30;
+        distance = getHeight() - mRectView.getHeight() - getPaddingTop() - 30;
     }
 
     /**
      * 开始加载动画
+     *
      * @param delayTime
      */
     private void startLoading(long delayTime) {
-        if(mAnimatorSet != null && mAnimatorSet.isRunning()) {
+        if (mAnimatorSet != null && mAnimatorSet.isRunning()) {
             return;
         }
         this.removeCallbacks(mRunnable);
-        if(delayTime > 0) {
-            postDelayed(mRunnable,delayTime);
+        if (delayTime > 0) {
+            postDelayed(mRunnable, delayTime);
         } else {
             post(mRunnable);
         }
@@ -128,8 +129,8 @@ public class JuProgressbar extends FrameLayout {
      * 停止加载动画
      */
     private void stopLoading() {
-        if(mAnimatorSet != null) {
-            if(mAnimatorSet.isRunning()) {
+        if (mAnimatorSet != null) {
+            if (mAnimatorSet.isRunning()) {
                 mAnimatorSet.cancel();
             }
             mAnimatorSet = null;
@@ -140,7 +141,7 @@ public class JuProgressbar extends FrameLayout {
     @Override
     public void setVisibility(int visibility) {
         super.setVisibility(visibility);
-        if(visibility == View.VISIBLE) {
+        if (visibility == View.VISIBLE) {
             startLoading(300);
         } else {
             stopLoading();
@@ -161,13 +162,13 @@ public class JuProgressbar extends FrameLayout {
     private void upThrow() {
         currentColor = mRectView.getNextColor();
         ObjectAnimator rectTranAnim = ObjectAnimator.ofFloat(mRectView,
-                "translationY",0,-distance / 2);
+                "translationY", 0, -distance / 2);
         ObjectAnimator rectRotateAnim = ObjectAnimator.ofFloat(mRectView,
-                "rotation",0,90);
+                "rotation", 0, 90);
         ObjectAnimator shadowScaleAnim = ObjectAnimator.ofFloat(shadowImg,
-                "scaleX",0.2f,1);
+                "scaleX", 0.2f, 1);
         ObjectAnimator rectColorAnim = ObjectAnimator.ofArgb(mRectView,
-                "rectColor", lastRectColor,currentColor);
+                "rectColor", lastRectColor, currentColor);
         lastRectColor = currentColor;
         rectRotateAnim.setInterpolator(upThrowInterpolator);
         rectTranAnim.setInterpolator(upThrowInterpolator);
@@ -178,7 +179,7 @@ public class JuProgressbar extends FrameLayout {
 
         mAnimatorSet.setDuration(ANIM_DURATION);
 
-        mAnimatorSet.playTogether(rectRotateAnim,rectTranAnim,shadowScaleAnim,rectColorAnim);
+        mAnimatorSet.playTogether(rectRotateAnim, rectTranAnim, shadowScaleAnim, rectColorAnim);
 
         mAnimatorSet.addListener(new Animator.AnimatorListener() {
             @Override
@@ -213,13 +214,13 @@ public class JuProgressbar extends FrameLayout {
         currentColor = mRectView.getNextColor();
 
         ObjectAnimator rectTranAnim = ObjectAnimator.ofFloat(mRectView,
-                "translationY",-distance / 2,0);
+                "translationY", -distance / 2, 0);
         ObjectAnimator rectRotateAnim = ObjectAnimator.ofFloat(mRectView,
-                "rotation",0,90);
+                "rotation", 0, 90);
         ObjectAnimator shadowScaleAnim = ObjectAnimator.ofFloat(shadowImg,
-                "scaleX",1,0.2f);
+                "scaleX", 1, 0.2f);
         ObjectAnimator rectColorAnim = ObjectAnimator.ofArgb(mRectView,
-                "rectColor", lastRectColor,currentColor);
+                "rectColor", lastRectColor, currentColor);
         lastRectColor = currentColor;
 
         rectRotateAnim.setInterpolator(downFallInterpolator);
@@ -229,7 +230,7 @@ public class JuProgressbar extends FrameLayout {
 
         mAnimatorSet = new AnimatorSet();
 
-        mAnimatorSet.playTogether(rectTranAnim,rectRotateAnim,shadowScaleAnim,rectColorAnim);
+        mAnimatorSet.playTogether(rectTranAnim, rectRotateAnim, shadowScaleAnim, rectColorAnim);
         mAnimatorSet.setDuration(ANIM_DURATION);
         mAnimatorSet.addListener(new Animator.AnimatorListener() {
             @Override

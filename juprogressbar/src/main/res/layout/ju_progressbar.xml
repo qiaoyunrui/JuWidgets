@@ -2,35 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/Ju_Progressbar_size"
     android:layout_height="@dimen/Ju_Progressbar_size"
+    android:layout_margin="@dimen/progress_margin"
     android:background="@drawable/ju_progressbar_style"
-    >
+    android:elevation="@dimen/progress_elevation">
 
     <com.juhezi.juprogressbar.View.RectView
         android:id="@+id/rectView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/shadowImg"/>
+        android:layout_above="@+id/shadowImg"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:visibility="visible"
         android:id="@+id/shadowImg"
         android:layout_width="23dp"
         android:layout_height="3dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/progress_margin_top"
-        android:layout_marginBottom="@dimen/shadow_margin_bottom"
         android:layout_above="@+id/loadTextTv"
-        android:src="@drawable/shadow_shape" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/shadow_margin_bottom"
+        android:layout_marginTop="@dimen/progress_margin_top"
+        android:src="@drawable/shadow_shape"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/loadTextTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/load_text"
         android:layout_alignParentBottom="true"
-        android:textSize="@dimen/load_text_size"
-        android:paddingBottom="@dimen/progress_margin"/>
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="@dimen/progress_padding"
+        android:text="@string/load_text"
+        android:textSize="@dimen/load_text_size" />
 
 </RelativeLayout>

@@ -5,7 +5,7 @@
     <dimen name="load_text_size">20sp</dimen>
     <dimen name="Ju_Progressbar_size">150dp</dimen>
     <dimen name="ju_progressbar_corner_radius">10dp</dimen>
-    <dimen name="progress_elevation">24dp</dimen>
+    <dimen name="progress_elevation">8dp</dimen>
     <dimen name="progress_padding">5dp</dimen>
     <dimen name="progress_margin_top">5dp</dimen>
     <dimen name="shadow_margin_bottom">5dp</dimen>

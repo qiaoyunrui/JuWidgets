@@ -8,19 +8,17 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@android:color/darker_gray"
     tools:context="com.juhezi.juwidgets.MainActivity">
 
     <com.juhezi.juprogressbar.View.JuProgressbar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        juhezi:colorNum="4"
+        android:visibility="visible"
         juhezi:color1="@color/blue"
         juhezi:color2="@color/red"
         juhezi:color3="@color/yellow"
         juhezi:color4="@color/green"
-        >
-    </com.juhezi.juprogressbar.View.JuProgressbar>
+        juhezi:colorNum="4"></com.juhezi.juprogressbar.View.JuProgressbar>
 
 </RelativeLayout>
