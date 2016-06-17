@@ -7,12 +7,8 @@ The wharehouse of weights.
 ## 1. JuProgressbar
   
   a little good progressbar like this:
-  
-  ![pic1](http://ww1.sinaimg.cn/mw690/005TG3l2jw1f4xyf7q84cj30qo1be75t.jpg)
-  
-  ![pic2](http://ww1.sinaimg.cn/mw690/005TG3l2jw1f4xyf82aglj30qo1bejt5.jpg)
-  
-  ![pic3](http://ww2.sinaimg.cn/mw690/005TG3l2jw1f4xyf8jagmj30qo1beabj.jpg)
+ 
+  ![pic](http://ww2.sinaimg.cn/mw690/005TG3l2jw1f4xyf8jagmj30qo1beabj.jpg)
   
   This progressbar provide some new properties:
   
