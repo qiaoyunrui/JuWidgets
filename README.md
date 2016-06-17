@@ -8,9 +8,11 @@ The wharehouse of weights.
   
   a little good progressbar like this:
   
-  the pictures is on the load..
+  ![pic1](http://ww1.sinaimg.cn/mw690/005TG3l2jw1f4xyf7q84cj30qo1be75t.jpg)
   
-  please wait a amount.
+  ![pic2](http://ww1.sinaimg.cn/mw690/005TG3l2jw1f4xyf82aglj30qo1bejt5.jpg)
+  
+  ![pic3](http://ww2.sinaimg.cn/mw690/005TG3l2jw1f4xyf8jagmj30qo1beabj.jpg)
   
   This progressbar provide some new properties:
   
@@ -44,6 +46,7 @@ The wharehouse of weights.
     ```
   
   Step 3. Add this view to your XML
+ 	
     ```html
     
       <com.juhezi.juprogressbar.View.JuProgressbar
