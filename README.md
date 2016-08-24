@@ -24,26 +24,26 @@ The wharehouse of weights.
   Step 1. Add the JitPack repository to your build file
     
     Add it in your root build.gradle at the end of repositories:
-    ```java
+```java
     allprojects {
 		  repositories {
 			...
 			maven { url "https://jitpack.io" }
 		  }
 	  }
-    ```
+```
     
   Step 2. Add the dependency
     
-    ```java
+```java
     dependencies {
 	        compile 'com.github.qiaoyunrui:JuWidgets:1.1'
 	  }
-    ```
+```
   
   Step 3. Add this view to your XML
  	
-    ```html
+```html
     
       <com.juhezi.juprogressbar.View.JuProgressbar
         android:layout_width="wrap_content"
@@ -58,7 +58,7 @@ The wharehouse of weights.
         juhezi:colorNum="4">
      </com.juhezi.juprogressbar.View.JuProgressbar>
      
-    ```
+```
   
 ## 2 .loading....
   
