@@ -1,1 +1,1 @@
-include ':app', ':juprogressbar'
+include ':app', ':juprogressbar', ':multifunctionbutton'

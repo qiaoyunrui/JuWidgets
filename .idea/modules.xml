@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/JuWidgets.iml" filepath="$PROJECT_DIR$/JuWidgets.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/juprogressbar/juprogressbar.iml" filepath="$PROJECT_DIR$/juprogressbar/juprogressbar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multifunctionbutton/multifunctionbutton.iml" filepath="$PROJECT_DIR$/multifunctionbutton/multifunctionbutton.iml" />
     </modules>
   </component>
 </project>
