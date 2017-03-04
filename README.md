@@ -1,15 +1,18 @@
-# JuWidgets
+# JuProgressbar
+
+  a little good progressbar like this:
+
+## Add it to your Project
 
 [![](https://jitpack.io/v/qiaoyunrui/JuWidgets.svg)](https://jitpack.io/#qiaoyunrui/JuWidgets)
 
-The wharehouse of weights.
 
-## 1. JuProgressbar
-  
-  a little good progressbar like this:
- 
-  ![pic](http://ww2.sinaimg.cn/mw690/005TG3l2jw1f4xyf8jagmj30qo1beabj.jpg)
-  
+## Preview
+
+<img src="http://ww2.sinaimg.cn/mw690/005TG3l2jw1f4xyf8jagmj30qo1beabj.jpg" height="300"/>
+
+## How to use
+
   This progressbar provide some new properties:
   
     * loadingText：the text of the loadingTextView
@@ -50,7 +53,7 @@ The wharehouse of weights.
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="visible"
-        juhezi:color1="@color/blue"
+        juhezi:color1="@color/blue"x
         juhezi:color2="@color/red"
         juhezi:color3="@color/yellow"
         juhezi:color4="@color/green"
@@ -59,6 +62,3 @@ The wharehouse of weights.
      </com.juhezi.juprogressbar.View.JuProgressbar>
      
 ```
-  
-## 2 .loading....
-  
